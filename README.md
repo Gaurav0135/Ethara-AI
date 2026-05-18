@@ -1,40 +1,51 @@
-# Team Task Manager
+# Team Task Manager (MERN Stack)
 
-A professional full-stack MERN application for managing team tasks and projects, featuring robust code quality tooling (ESLint & Prettier), JWT authentication, role-based access control, and a modern UI.
+A full-stack project management application with Kanban-style task tracking, role-based access control, and dynamic dashboard analytics.
+
+## Features Completed
+- **User Authentication**: Secure JWT-based authentication in HTTP-only cookies.
+- **Role-Based Access Control**: Admins can manage projects and users; Members only interact with tasks explicitly assigned to them.
+- **Interactive Kanban Board**: Full drag-and-drop support across status columns using `@hello-pangea/dnd`.
+- **Dynamic Analytics Dashboard**: Interactive charts displaying task statistics, completion percentages, and overdue tasks using `Recharts`.
+- **Project Management**: Explicit UI to add or remove members from projects.
+- **Form Validation**: Clean error handling and robust validation using `react-hook-form`.
+- **Polished UI**: Modern UI using Tailwind CSS v4, loading skeletons, empty state illustrations, and toast notifications (`react-hot-toast`).
 
 ## Tech Stack
-- **Frontend**: React (Vite), React Router DOM, Tailwind CSS, Axios, Context API, Recharts, React Icons
-- **Backend**: Node.js, Express.js, MongoDB (Mongoose), JWT, bcryptjs
-- **Code Quality**: ESLint, Prettier
+- **Frontend**: React (Vite), Tailwind CSS v4, React Router DOM, Recharts, React Hook Form, @hello-pangea/dnd
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB (Mongoose)
 
-## Prerequisites
-- Node.js (v18+)
-- MongoDB Atlas account (or local MongoDB)
-- Git
+## Environment Setup
+Create a `.env` file in the root of the project with the following keys:
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_jwt_key
+NODE_ENV=development
+```
 
-## Installation
+## Running Locally
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   cd server && npm install
-   cd ../client && npm install
-   ```
-3. Set up environment variables:
-   - Copy `server/.env.example` to `server/.env` and update the values.
-   - Copy `client/.env.example` to `client/.env` and update the values.
+1. Install dependencies in the root directory:
+```bash
+npm install
+```
 
-## ESLint & Prettier Setup
-This project strictly enforces code quality rules using ESLint and Prettier across both backend and frontend.
+2. Start the development environment (concurrently starts both client and server):
+```bash
+npm run dev
+```
 
-- To lint code: `npm run lint`
-- To format code: `npm run format`
+- Frontend runs on `http://localhost:5173`
+- Backend runs on `http://localhost:5000`
 
-## Deployment on Railway
+## Deployment to Railway
 
-1. Push your repository to GitHub.
-2. Sign up/Log in to Railway.app and create a new project.
-3. Choose "Deploy from GitHub repo" and select this repository.
-4. Add the necessary Environment Variables in the Railway project settings (`MONGO_URI`, `JWT_SECRET`, etc.).
-5. Ensure the Root Directory setting is empty (Railway usually auto-detects `package.json` scripts if configured correctly, though you may need a separate service for client/server or a single root build step).
+This repository is fully configured for a seamless monorepo deployment on Railway.
+
+1. Create a new project on **Railway** and connect this GitHub repository.
+2. In the Railway dashboard, go to the **Variables** tab and add your `MONGO_URI` and `JWT_SECRET`.
+3. Railway will automatically detect the `package.json` and install dependencies.
+4. The root `start` script handles running the backend server, and the backend is configured to statically serve the `client/dist` frontend bundle.
+5. Once built, the entire application will be publicly accessible from a single Railway URL!
