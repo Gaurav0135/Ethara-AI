@@ -19,11 +19,10 @@ const app = express()
 // Middleware
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'http://localhost:5175',
-    ],
+    origin: function (origin, callback) {
+      // Allow all origins dynamically to support cloud frontend deployment (Render, Vercel, etc.)
+      return callback(null, true)
+    },
     credentials: true,
   })
 )
@@ -48,5 +47,5 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`)
 })
