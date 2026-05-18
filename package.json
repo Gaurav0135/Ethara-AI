@@ -1,0 +1,21 @@
+{
+  "name": "team-task-manager",
+  "version": "1.0.0",
+  "description": "Full-stack MERN Team Task Manager Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run start --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "npm run build --prefix client",
+    "lint": "npm run lint --prefix server && npm run lint --prefix client",
+    "lint:fix": "npm run lint:fix --prefix server && npm run lint --fix --prefix client",
+    "format": "npm run format --prefix server && npm run format --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "author": "",
+  "license": "ISC"
+}
