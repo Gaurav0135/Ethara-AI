@@ -20,7 +20,18 @@ const app = express()
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow all origins dynamically to support cloud frontend deployment (Render, Vercel, etc.)
+      const allowedOrigins = [
+        'http://localhost:5173',
+        'http://localhost:5174',
+        'http://localhost:5175',
+        'https://your-frontend-domain.onrender.com',
+        process.env.FRONTEND_URL,
+      ]
+      // Allow requests with no origin (like mobile apps, curl requests) or allowed cloud origins
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true)
+      }
+      // Fallback dynamic allowance for seamless cloud deployments (Render, Vercel, Netlify)
       return callback(null, true)
     },
     credentials: true,
