@@ -1,0 +1,20 @@
+import axios from 'axios'
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'https://team-task-manager-backend-pk5l.onrender.com/api',
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+// Add a response interceptor for global error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error('API Error Interceptor:', error.response?.data?.message || error.message)
+    return Promise.reject(error)
+  }
+)
+
+export default api
